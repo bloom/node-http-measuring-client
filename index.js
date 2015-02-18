@@ -41,8 +41,8 @@ exports.create = function createHttp(httpModule) {
   }
 
   function setupTimerForRequest (timer, req, uri) {
-    setImmediate(timer.start.bind(timer, 'processingTime'));
-    setImmediate(timer.start.bind(timer, 'connectionTime'));
+    timer.start('processingTime');
+    timer.start('connectionTime');
     req.on('socket', timer.stop.bind(timer, 'connectionTime'));
     req.on('response', function(response) {
       timer.stop('processingTime');
